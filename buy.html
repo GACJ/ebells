@@ -38,10 +38,13 @@
           <a class="nav-link" href="buy.html">Ordering</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="guidance.html">Guidance</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="support.html">Support</a>
         </li>
       </ul>
-      <script async src="https://cse.google.com/cse.js?cx=004332315454476642900:jooqc3l3gee"></script>
+      <script async src="https://cse.google.com/cse.js?cx=8c22fa71ca91c3820"></script>
       <div class="gcse-searchbox-only"></div>
     </div>
   </nav>
@@ -52,123 +55,28 @@
       <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto">
         <h1 class="display-5 text-center">Buying eBells</h1>
       </div>
-      <p><b>eBells</b> are now available <b>to order</b>. Demand is high and orders will be processed in strict order of
-        payment
+      <p><b>eBells</b> are now available <b>to order</b>. Demand is high and orders will be processed in strict order of payment
         received. eBells are time-consuming to manufacture, and we are a not-for-profit cottage industry, so inevitably
         there will be a wait of some weeks for any backlog of orders to be fulfilled.</p>
       <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-          <img src="images/ebell.jpg" class="rounded float-left" width="100%" alt="eBells">
-          <p class="text-center"><i>An eBell</i></p>
-        </div>
-        <div class="col-2"></div>
-      </div>
+        <div class="col-3"></div>
+        <div class="col-6">
+          <div class="card">
+            <h5 class="card-header text-center">Ordering eBells</h5>
 
-      <div id="smart-button-container">
-        <div style="text-align: center;">
-          <div style="margin-bottom: 1.25rem;">
-            <p>USB Electronic handbells. Select quantity below. £7 will be added to each order for postage and packing.
-            </p>
-            <select id="item-options">
-              <option value="2 eBells" price="90.00">2 eBells - 90.00 GBP</option>
-              <option value="4 eBells" price="180.00">4 eBells - 180.00 GBP</option>
-              <option value="6 eBells" price="270.00">6 eBells - 270.00 GBP</option>
-              <option value="8 eBells" price="360.00">8 eBells - 360.00 GBP</option>
-              <option value="Single eBell" price="45.00">Single eBell - 45.00 GBP</option>
-            </select>
-            <select style="visibility: hidden" id="quantitySelect"></select>
+            <img class="card-img-top" src="images/ebell.jpg" alt="eBells">
           </div>
-          <div id="paypal-button-container"></div>
+          <div class="card-footer">
+            <h5 class="card-title text-primary">£45 per eBell plus £7 postage & packing per UK order</h5>
+            <p>To place an order click on the button below to send an email stating the quantity of eBells you require and your delivery
+              address. We will confirm the price on receipt of your order and provide details of the Bank Account for you to transfer
+              your payment.</p>
+            <div class="text-center"><a href="mailto:ebells@changeringing.co.uk?subject=eBells%20Order"
+                class="btn btn-primary">Email your order to ebells@changeringing.co.uk</a></div>
+          </div>
         </div>
+        <div class="col-3"></div>
       </div>
-      <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=GBP"
-        data-sdk-integration-source="button-factory"></script>
-      <script>
-        function initPayPalButton() {
-          var shipping = 7.00;
-          var itemOptions = document.querySelector("#smart-button-container #item-options");
-          var quantity = parseInt();
-          var quantitySelect = document.querySelector("#smart-button-container #quantitySelect");
-          if (!isNaN(quantity)) {
-            quantitySelect.style.visibility = "visible";
-          }
-          var orderDescription = 'USB Electronic handbell. Select quantity below. £7 will be added to each order for postage and packing.';
-          if (orderDescription === '') {
-            orderDescription = 'Item';
-          }
-          paypal.Buttons({
-            style: {
-              shape: 'pill',
-              color: 'gold',
-              layout: 'vertical',
-              label: 'buynow',
-
-            },
-            createOrder: function (data, actions) {
-              var selectedItemDescription = itemOptions.options[itemOptions.selectedIndex].value;
-              var selectedItemPrice = parseFloat(itemOptions.options[itemOptions.selectedIndex].getAttribute("price"));
-              var tax = (0 === 0) ? 0 : (selectedItemPrice * (parseFloat(0) / 100));
-              if (quantitySelect.options.length > 0) {
-                quantity = parseInt(quantitySelect.options[quantitySelect.selectedIndex].value);
-              } else {
-                quantity = 1;
-              }
-
-              tax *= quantity;
-              tax = Math.round(tax * 100) / 100;
-              var priceTotal = quantity * selectedItemPrice + parseFloat(shipping) + tax;
-              priceTotal = Math.round(priceTotal * 100) / 100;
-              var itemTotalValue = Math.round((selectedItemPrice * quantity) * 100) / 100;
-
-              return actions.order.create({
-                purchase_units: [{
-                  description: orderDescription,
-                  amount: {
-                    currency_code: 'GBP',
-                    value: priceTotal,
-                    breakdown: {
-                      item_total: {
-                        currency_code: 'GBP',
-                        value: itemTotalValue,
-                      },
-                      shipping: {
-                        currency_code: 'GBP',
-                        value: shipping,
-                      },
-                      tax_total: {
-                        currency_code: 'GBP',
-                        value: tax,
-                      }
-                    }
-                  },
-                  items: [{
-                    name: selectedItemDescription,
-                    unit_amount: {
-                      currency_code: 'GBP',
-                      value: selectedItemPrice,
-                    },
-                    quantity: quantity
-                  }]
-                }]
-              });
-            },
-            onApprove: function (data, actions) {
-              return actions.order.capture().then(function (details) {
-                alert('Transaction completed by ' + details.payer.name.given_name + '!');
-              });
-            },
-            onError: function (err) {
-              console.log(err);
-            },
-          }).render('#paypal-button-container');
-        }
-        initPayPalButton();
-      </script>
-      <p>For delivery outside the UK, payment by bank transfer, or for quantities not selectable above, please contact
-        us via email at
-        <a href="mailto:ebells@changeringing.co.uk?subject=Buying%20eBells"
-          target="_blank">ebells@changeringing.co.uk</a> for details.</p>
       <hr>
 
     </div> <!-- /container -->
