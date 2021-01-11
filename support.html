@@ -166,6 +166,10 @@
                 <li>More than one copy of the simulator is running. Close all but one instance.</li>
                 <li>Check that you are running the latest version of your simulator and Handbell Manager or Handbell
                   Stadium.</li>
+                  <li>Some users of versions of Handbell Manager prior to v2.2 have experienced bells not striking.
+                    This was due to their computer's timer (Environment.TickCount) returning negative values. This
+                    timer can be reset by doing a full shut down (sleep or hibernate is not sufficient), removing the power,
+                    and powering the computer back on, however this problem is resolved in Handbell Manager v2.2.</li>
                 <li>Handbell Manager is not running (required to connect to all simulators other than Handbell Stadium).
                 </li>
                 <li>The wrong simulator is chosen in Handbell Manager. Reselect using Run – Choose Simulator.</li>
